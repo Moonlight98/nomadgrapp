@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Alert } from "react-native";
 import LogInScreen from "./presenter";
 
@@ -8,6 +9,10 @@ class Container extends Component {
     password: "",
     isSubmitting: false
   };
+  static propTypes = {
+      login: PropTypes.func.isRequired,
+      fbLogin: PropTypes.func.isRequired
+    };
   render() {
     return (
       <LogInScreen
@@ -15,6 +20,7 @@ class Container extends Component {
         changeUsername={this._changeUsername}
         changePassword={this._changePassword}
         submit={this._submit}
+        fbLogin={this.props.fbLogin}
       />
     );
   }
@@ -34,11 +40,11 @@ class Container extends Component {
         });
         const loginResult = await login(username, password);
         if (!loginResult) {
-          Alert.alert("Something went wrong, try again");
+          Alert.alert("아이디 혹은 비밀번호를 잘못 입력하셨습니다");
           this.setState({ isSubmitting: false });
         }
       } else {
-        Alert.alert("All fields are required");
+        Alert.alert("아이디,비밀번호를 입력해주세요");
       }
     }
   };
