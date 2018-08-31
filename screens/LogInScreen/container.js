@@ -20,7 +20,7 @@ class Container extends Component {
         changeUsername={this._changeUsername}
         changePassword={this._changePassword}
         submit={this._submit}
-        fbLogin={this.props.fbLogin}
+        fbLogin={this._handleFBLogin}
       />
     );
   }
@@ -44,8 +44,16 @@ class Container extends Component {
           this.setState({ isSubmitting: false });
         }
       } else {
-        Alert.alert("아이디,비밀번호를 입력해주세요");
+        Alert.alert("아이디 또는 비밀번호를 입력해주세요");
       }
+    }
+  };
+  _handleFBLogin = async () => {
+    const { fbLogin } = this.props;
+    this.setState({ isSubmitting: true });
+    const facebookResult = await fbLogin();
+    if (!facebookResult) {
+      this.setState({ isSubmitting: false });
     }
   };
 }

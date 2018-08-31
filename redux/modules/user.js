@@ -74,8 +74,11 @@ function facebookLogin() {
                   access_token: token
                 })
               })
-                .then(response => response.json())
-                .then(json => {
+              .then(reponse => {
+                console.log(response);
+               return response.json();
+              }
+                ,then(json => {
                   if (json.user && json.token) {
                     dispatch(setLogIn(json.token));
                     dispatch(setUser(json.user));
@@ -83,7 +86,7 @@ function facebookLogin() {
                   } else {
                     return false;
                   }
-                });
+                }))
             }
           };
         }
