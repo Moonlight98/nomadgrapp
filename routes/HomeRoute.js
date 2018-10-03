@@ -6,8 +6,6 @@ import sharedRoutes, { sharedOptions } from "./sharedRoutes";
 import NavButton from "../components/NavButton";
 
 
-
- 
 const HomeRoute = createStackNavigator(
   {
     Home: {
@@ -20,10 +18,10 @@ const HomeRoute = createStackNavigator(
             resizeMode={"contain"}
           />
         ),
-        headerRight: (
+        headerLeft: (
           <NavButton
             iconName={"ios-camera-outline"}
-            onPress={() => navigation.navigate("Chat")}
+            onPress={() => navigation.navigate("TakePhoto")}
           />
         )
       })

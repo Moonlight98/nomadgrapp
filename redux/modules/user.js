@@ -64,6 +64,7 @@ function facebookLogin() {
           permissions: ["public_profile", "email"]
         }
       );
+      console.log(type)
           if (type === "success") {
               return fetch(`${API_URL}/users/login/facebook/`, {
                 method: "POST",
@@ -74,11 +75,11 @@ function facebookLogin() {
                   access_token: token
                 })
               })
-              .then(reponse => {
+              .then(response => {
                 console.log(response);
                return response.json();
-              }
-                ,then(json => {
+              })
+                .then(json => {
                   if (json.user && json.token) {
                     dispatch(setLogIn(json.token));
                     dispatch(setUser(json.user));
@@ -86,7 +87,7 @@ function facebookLogin() {
                   } else {
                     return false;
                   }
-                }))
+                })
             }
           };
         }
